@@ -30,9 +30,6 @@ void setup() {
   digitalWrite(PIN_BUZZER, LOW);
   pinMode(PIN_SENSOR_NIVEL_REF, INPUT);
 
-  //analogReference(INTERNAL);
-
-
 
   display.begin(SH1106_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
   display.setRotation(2);
@@ -60,6 +57,7 @@ void loop() {
   dibujarTempAgua();
   dibujarPresionAceite();
   dibujarVolajeBateria();
+  dibujarPararNivelBajoAgua();
   if (!latido) {
     display.fillCircle(23,7,1,WHITE); // Latido
     latido = true;
@@ -72,6 +70,9 @@ void loop() {
   Serial.println(hayRefrigerante);
   delay(500);
 }
+
+// delay al empezaar
+// logo
 
 
 

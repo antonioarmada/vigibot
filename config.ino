@@ -1,19 +1,20 @@
-// ALARMAS
+
   int iniciobarras= 54;
   int anchobarras= 74;
   int altobarras= 13;
-  
+
+// ALARMAS
   int tempMinBlock= 60;
   int tempAlertaBlock= 105;
   int tempMaxBlock= 110;
   
   int tempMinAgua= 60;
   int tempAlertaAgua= 95;
-  int tempMaxAgua= 105;
+  int tempMaxAgua= 100;
 
-  int presMinAceite= 0;
-  int presAlertaMinAceite= 5;
-  int presAlertaMaxAceite= 125;
+  int presMinAceite= 5;
+  int presAlertaMinAceite= 10;
+  int presAlertaMaxAceite= 120;
   int presMaxAceite=125;
 
   int voltMedioBateria= 12;

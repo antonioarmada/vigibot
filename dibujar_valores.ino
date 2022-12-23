@@ -115,3 +115,5 @@ void dibujarVolajeBateria(){
   display.setCursor(26,62);
   display.print(valorMedido);
 }
+
+
