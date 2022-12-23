@@ -7,23 +7,22 @@ int calcularAnchoBarra(int medidoValor, int minValor, int maxValor) {
   return (int(anchoBarraFilled));
 }
 
-void dibujarTempBlock(){
-  int valorMedido = medirTempBlock();
+void dibujarTempBlock(int valorMedido){
   display.drawCircle(49,3,2,WHITE);
   display.drawRect(iniciobarras, 2, anchobarras,  altobarras, WHITE);
-  display.fillRect(iniciobarras, 2, calcularAnchoBarra(valorMedido,tempMinBlock,tempMaxBlock), altobarras, WHITE);
+  display.fillRect(iniciobarras, 2, calcularAnchoBarra(valorMedido,TEMP_MIN_BLOCK,TEMP_MAX_BLOCK), altobarras, WHITE);
   display.setFont(); // usa fuente default
   display.setTextColor(WHITE);
   display.setCursor(1, 5);
   display.println("BLK");
-  if (valorMedido > tempMinBlock) {
+  if (valorMedido > TEMP_MIN_BLOCK) {
     display.setTextColor(BLACK);
   } 
   display.setCursor(iniciobarras+2, 5);
-  display.println(tempMinBlock);
+  display.println(TEMP_MIN_BLOCK);
   display.setTextColor(WHITE);
   display.setCursor(iniciobarras+anchobarras-20, 5);
-  display.println(tempMaxBlock);
+  display.println(TEMP_MAX_BLOCK);
   display.setFont(&FreeSans9pt7b);
   display.setCursor(16,12);
   //display.print("b ");
@@ -33,22 +32,22 @@ void dibujarTempBlock(){
   display.print(valorMedido);
 }
 
-void dibujarTempAgua(){
-  int valorMedido = medirTempAgua();
+void dibujarTempAgua(int valorMedido){
   display.drawCircle(49,20,2,WHITE);
   display.drawRect(iniciobarras, 18, anchobarras,  altobarras, WHITE);
-  display.fillRect(iniciobarras, 18, calcularAnchoBarra(valorMedido,tempMinAgua,tempMaxAgua), altobarras, WHITE);
+  display.fillRect(iniciobarras, 18, calcularAnchoBarra(valorMedido,TEMP_MIN_AGUA,TEMP_MAX_AGUA), altobarras, WHITE);
   display.setFont(); // usa fuente default
+  display.setTextColor(WHITE);
   display.setCursor(1, 20);
   display.println("RFR");
-  if (valorMedido > tempMinAgua) {
+  if (valorMedido > TEMP_MIN_AGUA) {
     display.setTextColor(BLACK);
   } 
   display.setCursor(iniciobarras+2, 21);
-  display.println(tempMinAgua);
+  display.println(TEMP_MIN_AGUA);
   display.setTextColor(WHITE);
   display.setCursor(iniciobarras+anchobarras-20, 21);
-  display.println(tempMaxAgua);
+  display.println(TEMP_MAX_AGUA);
   display.setFont(&FreeSans9pt7b);
   display.setCursor(16,28);
   //display.print("a ");
@@ -58,11 +57,11 @@ void dibujarTempAgua(){
   display.print(valorMedido);
 }
 
-void dibujarPresionAceite(){
-  int valorMedido = medirPresionAceite();
+void dibujarPresionAceite(int valorMedido){
   display.drawRect(iniciobarras, 34, anchobarras, altobarras, WHITE);
-  display.fillRect(iniciobarras, 34, calcularAnchoBarra(valorMedido,presMinAceite,presMaxAceite), altobarras, WHITE);
+  display.fillRect(iniciobarras, 34, calcularAnchoBarra(valorMedido,PRES_MIN_ACEITE,PRES_MAX_ACEITE), altobarras, WHITE);
   display.setFont(); // usa fuente default
+  display.setTextColor(WHITE);
   display.setCursor(47, 29);
   display.println("p");
   display.setCursor(47, 36);
@@ -71,14 +70,14 @@ void dibujarPresionAceite(){
   display.println("i");
   display.setCursor(1, 35);
   display.println("PRE");
-  if (valorMedido > presMinAceite) {
+  if (valorMedido > PRES_MIN_ACEITE) {
     display.setTextColor(BLACK);
   } 
   display.setCursor(iniciobarras+2, 37);
-  display.println(presMinAceite);
+  display.println(PRES_MIN_ACEITE);
   display.setTextColor(WHITE);
   display.setCursor(iniciobarras+anchobarras-20, 37);
-  display.println(presMaxAceite);
+  display.println(PRES_MAX_ACEITE);
   display.setFont(&FreeSans9pt7b);
   display.setCursor(16,45);
   if (valorMedido<100) {
@@ -87,18 +86,17 @@ void dibujarPresionAceite(){
   display.print(valorMedido);
 }
 
-void dibujarVolajeBateria(){
-  int valorMedido = medirVoltajeBateria();
+void dibujarVolajeBateria(int valorMedido){
   display.drawRect(iniciobarras, 50, anchobarras, altobarras, WHITE);
-  if (valorMedido < voltMedioBateria && valorMedido >= voltMinBat) {
-    float delta_ = voltMedioBateria - valorMedido;
-    int anchoBarraFilled_ = int (delta_/(voltMedioBateria-voltMinBat)*anchobarras/2);
+  if (valorMedido < VOLTAJE_MEDIO_BAT && valorMedido >= VOLTAJE_MIN_BAT) {
+    float delta_ = VOLTAJE_MEDIO_BAT - valorMedido;
+    int anchoBarraFilled_ = int (delta_/(VOLTAJE_MEDIO_BAT-VOLTAJE_MIN_BAT)*anchobarras/2);
     display.fillRect(iniciobarras+anchobarras/2-anchoBarraFilled_, 50, anchoBarraFilled_, altobarras, WHITE);    
-  } else if (valorMedido > voltMedioBateria) { //  && valorMedido <= voltMaxBat
-    display.fillRect(iniciobarras+anchobarras/2, 50 ,calcularAnchoBarra(valorMedido,voltMedioBateria,voltMaxBat)/2, altobarras, WHITE);
-  } else if (valorMedido < voltMinBat) {
+  } else if (valorMedido > VOLTAJE_MEDIO_BAT) { //  && valorMedido <= VOLTAJE_MAX_BAT
+    display.fillRect(iniciobarras+anchobarras/2, 50 ,calcularAnchoBarra(valorMedido,VOLTAJE_MEDIO_BAT,VOLTAJE_MAX_BAT)/2, altobarras, WHITE);
+  } else if (valorMedido < VOLTAJE_MIN_BAT) {
     display.fillRect(iniciobarras, 50, anchobarras/2, altobarras, WHITE);
-  } else if (valorMedido = voltMedioBateria) {
+  } else if (valorMedido = VOLTAJE_MEDIO_BAT) {
     display.fillCircle(iniciobarras+anchobarras/2,56,3,WHITE);
   }
   display.setFont(); // usa fuente default
@@ -108,9 +106,9 @@ void dibujarVolajeBateria(){
   display.setCursor(47, 55);
   display.print("V");
   display.setCursor(iniciobarras+3, 53);
-  display.println(voltMinBat);
+  display.println(VOLTAJE_MIN_BAT);
   display.setCursor(iniciobarras+anchobarras-14, 53);
-  display.println(voltMaxBat);
+  display.println(VOLTAJE_MAX_BAT);
   display.setFont(&FreeSans9pt7b);
   display.setCursor(26,62);
   display.print(valorMedido);
