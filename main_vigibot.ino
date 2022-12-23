@@ -11,7 +11,7 @@
 #define AIN_BAT  A0
 #define AIN_TEMP_REGRIG  A1
 #define AIN_PRESION  A2
-#define PIN_TERMOMETRO 7
+#define PIN_TERMOMETRO 3
 #define PIN_BUZZER 6
 #define PIN_SENSOR_NIVEL_REF 4
 
@@ -27,7 +27,7 @@ void setup() {
   Serial.println("HOLA MUNDO");
   
   pinMode(PIN_BUZZER, OUTPUT);
-  digitalWrite(PIN_BUZZER, LOW)
+  digitalWrite(PIN_BUZZER, LOW);
   pinMode(PIN_SENSOR_NIVEL_REF, INPUT);
 
   //analogReference(INTERNAL);
@@ -67,7 +67,7 @@ void loop() {
     latido = false;
   }
   display.display();
-  //digitalWrite(PIN_BUZZER, HIGH); 
+  digitalWrite(PIN_BUZZER, HIGH); 
   bool hayRefrigerante = digitalRead(PIN_SENSOR_NIVEL_REF);
   Serial.println(hayRefrigerante);
   delay(500);

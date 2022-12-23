@@ -24,10 +24,10 @@
 
 
   // divisores de voltaje
-  #define R1_BAT  4639 //+12-Vout
-  #define R2_BAT  985 // Vout-GND
-  #define R1_TEMP  33.9 // Vout-GND
-  #define R1_PRES 33.9 // Vout-GND
+  #define R1_BAT  4700 //+12-Vout 4639- 3675
+  #define R2_BAT  983 // Vout-GND
+  #define R1_TEMP  32.8 // Vout-GND
+  #define R1_PRES 33.0 // Vout-GND
   #define VTOTAL = 5 // voltaje total
 
   //coef Steinhart-Hart para bulbo de temp SIEMENS AMR1425 (original)
