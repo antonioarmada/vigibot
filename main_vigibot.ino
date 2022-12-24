@@ -32,15 +32,22 @@ void setup() {
   display.setRotation(2);
   display.display();
   printLogo();
-  delay(ESPERA_EN_CONTACTO);
+  delay(2000); //  delay(ESPERA_EN_CONTACTO);
+
 }
 
 void loop() {
   static bool latido=false;
   static unsigned long tiempoUltimoPitido;
+  static bool noSonarAlInicio = true;
   bool enAlarma = false;
   bool cartelParar = false;
   int valorMedido;
+
+   if (millis() > ESPERA_EN_CONTACTO) {
+     noSonarAlInicio = false; 
+   }
+   //noSonarAlInicio = true; // sacarS
 
   // INTERFASE
   display.clearDisplay();
@@ -53,11 +60,11 @@ void loop() {
   if (!cartelParar && valorMedido < TEMP_ALERTA_BLOCK) {
     dibujarTempBlock(valorMedido);
   }
-   if (!cartelParar && valorMedido >= TEMP_ALERTA_BLOCK) {
+   if (!noSonarAlInicio && !cartelParar && valorMedido >= TEMP_ALERTA_BLOCK) {
     dibujarAlarmaTempBlock(valorMedido);
     enAlarma=true;
   }
-  if (!cartelParar && valorMedido >= TEMP_MAX_BLOCK) {
+  if (!noSonarAlInicio && !cartelParar && valorMedido >= TEMP_MAX_BLOCK) {
     dibujarPararTempBlock(valorMedido);
     cartelParar = true;
   }
@@ -68,11 +75,11 @@ void loop() {
   if (!cartelParar && valorMedido < TEMP_ALERTA_AGUA) {
     dibujarTempAgua(valorMedido);
   }
-   if (!cartelParar && valorMedido >= TEMP_ALERTA_AGUA) {
+   if (!noSonarAlInicio && !cartelParar && valorMedido >= TEMP_ALERTA_AGUA) {
     dibujarAlarmaTempAgua(valorMedido);
     enAlarma=true;
   }
-  if (!cartelParar && valorMedido >= TEMP_MAX_AGUA) {
+  if (!noSonarAlInicio && !cartelParar && valorMedido >= TEMP_MAX_AGUA) {
     dibujarPararTempAgua(valorMedido);
     cartelParar = true;
   }
@@ -80,22 +87,22 @@ void loop() {
   // Check Presion Aceite
   valorMedido = medirPresionAceite();
   //valorMedido = 121;
-  if (!cartelParar && valorMedido < PRES_ALERTA_MAX_ACEITE && valorMedido > PRES_ALERTA_MIN_ACEITE) {
+  if (!cartelParar && valorMedido < PRES_ALERTA_MAX_ACEITE && valorMedido > PRES_ALERTA_MIN_ACEITE || noSonarAlInicio) {
     dibujarPresionAceite(valorMedido);
   }
-   if (!cartelParar && valorMedido >= PRES_ALERTA_MAX_ACEITE) {
+   if (!noSonarAlInicio && !cartelParar && valorMedido >= PRES_ALERTA_MAX_ACEITE) {
     dibujarAlarmaMaxPresionAceite(valorMedido);
     enAlarma=true;
   }
-  if (!cartelParar && valorMedido <= PRES_ALERTA_MIN_ACEITE) {
+  if (!noSonarAlInicio && !cartelParar && valorMedido <= PRES_ALERTA_MIN_ACEITE) {
     dibujarAlarmaMinPresionAceite(valorMedido);
     enAlarma=true;
   }
-  if (!cartelParar && valorMedido >= PRES_MAX_ACEITE) {
+  if (!noSonarAlInicio && !cartelParar && valorMedido >= PRES_MAX_ACEITE) {
     dibujarPararMaxAceite(valorMedido);
     cartelParar = true;
   }
-  if (!cartelParar && valorMedido <= PRES_MIN_ACEITE) {
+  if (!noSonarAlInicio && !cartelParar && valorMedido <= PRES_MIN_ACEITE) {
     dibujarPararMinAceite(valorMedido);
     cartelParar = true;
   }
@@ -103,22 +110,24 @@ void loop() {
   // Check Voltaje de carga Batería
   valorMedido = medirVoltajeBateria();
   //valorMedido = 12;
-  if (!cartelParar && valorMedido < VOLTAJE_MAX_BAT && valorMedido > VOLTAJE_MIN_BAT) {
+  if (!cartelParar && valorMedido < VOLTAJE_MAX_BAT && valorMedido > VOLTAJE_MIN_BAT || noSonarAlInicio) {
     dibujarVolajeBateria(valorMedido);
   }
-  if (!cartelParar && valorMedido >= VOLTAJE_MAX_BAT) {
+  if (!noSonarAlInicio && !cartelParar && valorMedido >= VOLTAJE_MAX_BAT) {
     dibujarPararMaxBateria(valorMedido);
     cartelParar = true;
   }
-  if (!cartelParar && valorMedido <= VOLTAJE_MIN_BAT) {
+  if (!noSonarAlInicio && !cartelParar && valorMedido <= VOLTAJE_MIN_BAT) {
     dibujarPararMinBateria(valorMedido);
     cartelParar = true;
   }
 
+
   // Check Nivel de Regrigerante
+  // si se activa al iniciar, no tiene delay
   bool noHayRefrigerante = digitalRead(PIN_SENSOR_NIVEL_REF);
   //noHayRefrigerante = 0;
-  if (noHayRefrigerante) {
+  if (!noSonarAlInicio && noHayRefrigerante) {
     dibujarPararNivelBajoAgua();
     cartelParar = true;
   }
@@ -132,6 +141,13 @@ void loop() {
     latido = false;
     digitalWrite(PIN_LATIDO,LOW);
   }
+
+  // Cartel esperando al inicio
+  if (noSonarAlInicio) {
+    cartelEsperando();
+  }
+
+  // Renderiza todo lo dibujado en el buffer
   display.display();
   
   // Activacion de Buzzer de alarma
@@ -148,10 +164,9 @@ void loop() {
   }
 
   delay(500);
+
 }
 
-// delay al empezaar
-// logo
 
 
 

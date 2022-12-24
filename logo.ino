@@ -31,8 +31,8 @@ static const unsigned char PROGMEM logo[] =
 
 void printLogo(){
   display.setTextColor(WHITE);
-  display.setCursor(35,50);
-  display.print("ESPERANDO");
-  display.drawBitmap(25, 0, logo, 68, 46, WHITE); // display.drawBitmap(x position, y position, bitmap data, bitmap width, bitmap height, color)
+  display.setCursor(33,50);
+  display.print("- VIGIBOT -");
+  display.drawBitmap(30, 0, logo, 68, 46, WHITE); // display.drawBitmap(x position, y position, bitmap data, bitmap width, bitmap height, color)
   display.display();
 }

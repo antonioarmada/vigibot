@@ -14,7 +14,7 @@ void dibujarTempBlock(int valorMedido){
   display.setFont(); // usa fuente default
   display.setTextColor(WHITE);
   display.setCursor(1, 5);
-  display.println("BLK");
+  display.println(F("BLK"));
   if (valorMedido > TEMP_MIN_BLOCK) {
     display.setTextColor(BLACK);
   } 
@@ -39,7 +39,7 @@ void dibujarTempAgua(int valorMedido){
   display.setFont(); // usa fuente default
   display.setTextColor(WHITE);
   display.setCursor(1, 20);
-  display.println("RFR");
+  display.println(F("RFR"));
   if (valorMedido > TEMP_MIN_AGUA) {
     display.setTextColor(BLACK);
   } 
@@ -69,7 +69,7 @@ void dibujarPresionAceite(int valorMedido){
   display.setCursor(47, 42);
   display.println("i");
   display.setCursor(1, 35);
-  display.println("PRE");
+  display.println(F("PRE"));
   if (valorMedido > PRES_MIN_ACEITE) {
     display.setTextColor(BLACK);
   } 
@@ -102,9 +102,9 @@ void dibujarVolajeBateria(int valorMedido){
   display.setFont(); // usa fuente default
   display.setTextColor(WHITE);
   display.setCursor(1, 53);
-  display.println("BAT");
+  display.println(F("BAT"));
   display.setCursor(47, 55);
-  display.print("V");
+  display.print(F("V"));
   display.setCursor(iniciobarras+3, 53);
   display.println(VOLTAJE_MIN_BAT);
   display.setCursor(iniciobarras+anchobarras-14, 53);

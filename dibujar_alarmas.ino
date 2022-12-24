@@ -87,13 +87,13 @@ void dibujarPararTempBlock(int valorMedido){
   display.setTextColor(BLACK);
   display.setFont(); // usa fuente default
   display.setCursor(35, 25);
-  display.print("TEMP BLOCK");
+  display.print(F("TEMP BLOCK"));
   display.setCursor(28, 53);
-  display.print("MAYOR QUE ");
+  display.print(F("MAYOR QUE "));
   display.print(TEMP_MAX_BLOCK);
   display.setFont(&FreeSans9pt7b);
   display.setCursor(33,20);
-  display.print("PARAR");
+  display.print(F("PARAR"));
   display.setCursor(47,48);
   display.print(valorMedido); //valorMedido  
 }
@@ -103,13 +103,13 @@ void dibujarPararTempAgua(int valorMedido){
   display.setTextColor(BLACK);
   display.setFont(); // usa fuente default
   display.setCursor(10, 25);
-  display.print("TEMP REFRIGERANTE");
+  display.print(F("TEMP REFRIGERANTE"));
   display.setCursor(28, 53);
-  display.print("MAYOR QUE ");
+  display.print(F("MAYOR QUE "));
   display.print(TEMP_MAX_AGUA);
   display.setFont(&FreeSans9pt7b);
   display.setCursor(33,20);
-  display.print("PARAR");
+  display.print(F("PARAR"));
   display.setCursor(47,48);
   display.print(valorMedido); //valorMedido  
 }
@@ -119,13 +119,13 @@ void dibujarPararMinAceite(int valorMedido){
   display.setTextColor(BLACK);
   display.setFont(); // usa fuente default
   display.setCursor(13, 25);
-  display.print("PRESION DE ACEITE");
+  display.print(F("PRESION DE ACEITE"));
   display.setCursor(28, 53);
-  display.print("MENOR QUE ");
+  display.print(F("MENOR QUE "));
   display.print(PRES_MIN_ACEITE);
   display.setFont(&FreeSans9pt7b);
   display.setCursor(33,20);
-  display.print("PARAR");
+  display.print(F("PARAR"));
   display.setCursor(60,48);
   display.print(valorMedido); //valorMedido  
 }
@@ -135,13 +135,13 @@ void dibujarPararMaxAceite(int valorMedido){
   display.setTextColor(BLACK);
   display.setFont(); // usa fuente default
   display.setCursor(13, 25);
-  display.print("PRESION DE ACEITE");
+  display.print(F("PRESION DE ACEITE"));
   display.setCursor(28, 53);
-  display.print("MAYOR QUE ");
+  display.print(F("MAYOR QUE "));
   display.print(PRES_MAX_ACEITE);
   display.setFont(&FreeSans9pt7b);
   display.setCursor(33,20);
-  display.print("PARAR");
+  display.print(F("PARAR"));
   display.setCursor(50,48);
   display.print(valorMedido); //valorMedido  
 }
@@ -151,14 +151,14 @@ void dibujarPararMinBateria(int valorMedido){
   display.setTextColor(BLACK);
   display.setFont(); // usa fuente default
   display.setCursor(13, 25);
-  display.print("VOLTAJE BATERIA");
+  display.print(F("VOLTAJE BATERIA"));
   display.setCursor(28, 53);
-  display.print("MENOR QUE ");
+  display.print(F("MENOR QUE "));
   display.print(VOLTAJE_MIN_BAT);
   display.print("v");
   display.setFont(&FreeSans9pt7b);
   display.setCursor(33,20);
-  display.print("PARAR");
+  display.print(F("PARAR"));
   display.setCursor(53,48);
   display.print(valorMedido); //valorMedido  
   display.print("v");
@@ -169,14 +169,14 @@ void dibujarPararMaxBateria(int valorMedido){
   display.setTextColor(BLACK);
   display.setFont(); // usa fuente default
   display.setCursor(22, 25);
-  display.print("VOLTAJE BATERIA");
+  display.print(F("VOLTAJE BATERIA"));
   display.setCursor(25, 53);
-  display.print("MAYOR QUE ");
+  display.print(F("MAYOR QUE "));
   display.print(VOLTAJE_MAX_BAT);
   display.print("v");
   display.setFont(&FreeSans9pt7b);
   display.setCursor(33,20);
-  display.print("PARAR");
+  display.print(F("PARAR"));
   display.setCursor(49,48);
   display.print(valorMedido); //valorMedido  
   display.print("v");
@@ -187,10 +187,25 @@ void dibujarPararNivelBajoAgua(){
   display.setTextColor(BLACK);
   display.setFont(); // usa fuente default
   display.setCursor(10, 27);
-  display.print("NIVEL REFRIGERANTE");
+  display.print(F("NIVEL REFRIGERANTE"));
   display.setFont(&FreeSans9pt7b);
   display.setCursor(33,20);
-  display.print("PARAR");
+  display.print(F("PARAR"));
   display.setCursor(45,54);
-  display.print("BAJO"); //valorMedido  
+  display.print(F("BAJO")); //valorMedido  
+}
+
+void cartelEsperando(){
+  long cuentaRegresiva;
+  cuentaRegresiva = round((ESPERA_EN_CONTACTO - millis()) / 1000);
+  display.fillRect(iniciobarras, 2, anchobarras, 62, WHITE);
+  display.setFont(); // usa fuente default
+  display.setTextColor(BLACK);
+  display.setCursor(iniciobarras+10, 15);
+  display.println(F("ESPERANDO")); // uso F() porque se queda sin memoria
+  display.setCursor(iniciobarras+12, 25);
+  display.println(F("INICIAR"));
+  display.setFont(&FreeSans9pt7b);
+  display.setCursor(iniciobarras+25,50);
+  display.print(cuentaRegresiva);
 }

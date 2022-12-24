@@ -4,7 +4,7 @@
   int altobarras= 13;
 
 // ALARMAS
-  #define ESPERA_EN_CONTACTO 2000
+  #define ESPERA_EN_CONTACTO 60000
 
   #define TEMP_MIN_BLOCK  60 
   #define TEMP_ALERTA_BLOCK  105
@@ -52,9 +52,9 @@
   #define AIN_TEMP_REGRIG  A1
   #define AIN_PRESION  A2
   #define PIN_TERMOMETRO 3
-  #define PIN_BUZZER 13 // 6
+  #define PIN_BUZZER 6 // 6
   #define PIN_SENSOR_NIVEL_REF 4
-  #define PIN_LATIDO 6 // 13
+  #define PIN_LATIDO 13 // 13
   
   
 
