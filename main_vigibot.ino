@@ -9,7 +9,7 @@
 #include "config.h"
 
 
-#define OLED_RESET 4
+#define OLED_RESET -1 //4
 Adafruit_SH1106 display(OLED_RESET);
 
 OneWire ourWire(PIN_TERMOMETRO);                //Se establece el pin 2  como bus OneWire
@@ -28,18 +28,11 @@ void setup() {
 
 
   display.begin(SH1106_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
+  display.clearDisplay(); // si no borro aca muestra logo de Adafruit
   display.setRotation(2);
-  // Show image buffer on the display hardware.
-  // Since the buffer is intialized with an Adafruit splashscreen
-  // internally, this will display the splashscreen.
   display.display();
-  delay(1000);
-
-  // Clear the buffer.
-  display.clearDisplay();
-  display.display();
-
-
+  printLogo();
+  delay(ESPERA_EN_CONTACTO);
 }
 
 void loop() {
@@ -56,7 +49,7 @@ void loop() {
 
   // Check Temp Block
   valorMedido = medirTempBlock();
-  valorMedido = 90;
+  //valorMedido = 90;
   if (!cartelParar && valorMedido < TEMP_ALERTA_BLOCK) {
     dibujarTempBlock(valorMedido);
   }
@@ -71,7 +64,7 @@ void loop() {
 
   // Check Temp Refrigerante
   valorMedido = medirTempAgua();
-  valorMedido = 90;
+  //valorMedido = 90;
   if (!cartelParar && valorMedido < TEMP_ALERTA_AGUA) {
     dibujarTempAgua(valorMedido);
   }
@@ -86,7 +79,7 @@ void loop() {
 
   // Check Presion Aceite
   valorMedido = medirPresionAceite();
-  valorMedido = 121;
+  //valorMedido = 121;
   if (!cartelParar && valorMedido < PRES_ALERTA_MAX_ACEITE && valorMedido > PRES_ALERTA_MIN_ACEITE) {
     dibujarPresionAceite(valorMedido);
   }
@@ -109,7 +102,7 @@ void loop() {
 
   // Check Voltaje de carga Batería
   valorMedido = medirVoltajeBateria();
-  valorMedido = 12;
+  //valorMedido = 12;
   if (!cartelParar && valorMedido < VOLTAJE_MAX_BAT && valorMedido > VOLTAJE_MIN_BAT) {
     dibujarVolajeBateria(valorMedido);
   }
@@ -124,7 +117,7 @@ void loop() {
 
   // Check Nivel de Regrigerante
   bool noHayRefrigerante = digitalRead(PIN_SENSOR_NIVEL_REF);
-  noHayRefrigerante = 0;
+  //noHayRefrigerante = 0;
   if (noHayRefrigerante) {
     dibujarPararNivelBajoAgua();
     cartelParar = true;
