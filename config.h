@@ -11,11 +11,11 @@
   #define TEMP_MAX_BLOCK  110
   
   #define TEMP_MIN_AGUA  60
-  #define TEMP_ALERTA_AGUA 95
+  #define TEMP_ALERTA_AGUA 98
   #define TEMP_MAX_AGUA  100
 
-  #define PRES_MIN_ACEITE  5
-  #define PRES_ALERTA_MIN_ACEITE 10 
+  #define PRES_MIN_ACEITE  11
+  #define PRES_ALERTA_MIN_ACEITE 20 
   #define PRES_ALERTA_MAX_ACEITE  120
   #define PRES_MAX_ACEITE 125
 

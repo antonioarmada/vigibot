@@ -125,9 +125,9 @@ void loop() {
 
   // Check Nivel de Regrigerante
   // si se activa al iniciar, no tiene delay
-  bool noHayRefrigerante = digitalRead(PIN_SENSOR_NIVEL_REF);
+  bool hayRefrigerante = digitalRead(PIN_SENSOR_NIVEL_REF);
   //noHayRefrigerante = 0;
-  if (!noSonarAlInicio && noHayRefrigerante) {
+  if (!noSonarAlInicio && !hayRefrigerante) {
     dibujarPararNivelBajoAgua();
     cartelParar = true;
   }
