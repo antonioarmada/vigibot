@@ -7,6 +7,8 @@
 #include <OneWire.h>                
 #include <DallasTemperature.h>
 #include "config.h"
+#include <Average.h>                            //incluida en este paquete https://github.com/MajenkoLibraries/Average.git
+
 
 
 #define OLED_RESET -1 //4
@@ -15,10 +17,13 @@ Adafruit_SH1106 display(OLED_RESET);
 OneWire ourWire(PIN_TERMOMETRO);                //Se establece el pin 2  como bus OneWire
 DallasTemperature sensors(&ourWire);            //Se declara una variable u objeto para nuestro sensor
 
+Average<int> array_temp(TEMP_NUMERO_LECTURAS_A_PROMEDIAR);
+Average<int> array_pres(PRES_NUMERO_LECTURAS_A_PROMEDIAR);
+
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("HOLA MUNDO");
+  Serial.println("VIGIBOT");
   
   pinMode(PIN_BUZZER, OUTPUT);
   digitalWrite(PIN_BUZZER, LOW);
@@ -27,12 +32,12 @@ void setup() {
   digitalWrite(PIN_LATIDO, LOW);
 
 
-  display.begin(SH1106_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
-  display.clearDisplay(); // si no borro aca muestra logo de Adafruit
+  display.begin(SH1106_SWITCHCAPVCC, 0x3C);   // initialize with the I2C addr 0x3D (for the 128x64)
+  display.clearDisplay();                     // si no borro aca muestra logo de Adafruit
   display.setRotation(2);
   display.display();
   printLogo();
-  delay(2000); //  delay(ESPERA_EN_CONTACTO);
+  delay(2000);
 
 }
 
@@ -46,8 +51,9 @@ void loop() {
 
    if (millis() > ESPERA_EN_CONTACTO) {
      noSonarAlInicio = false; 
+   } else if (medirPresionAceite() > PRES_ALERTA_MIN_ACEITE) {
+     noSonarAlInicio = false; // para que salga de la espera cuando arranco el motor, si hay presion de aceite claro..
    }
-   //noSonarAlInicio = true; // sacarS
 
   // INTERFASE
   display.clearDisplay();
@@ -56,7 +62,6 @@ void loop() {
 
   // Check Temp Block
   valorMedido = medirTempBlock();
-  //valorMedido = 90;
   if (!cartelParar && valorMedido < TEMP_ALERTA_BLOCK) {
     dibujarTempBlock(valorMedido);
   }
@@ -71,7 +76,6 @@ void loop() {
 
   // Check Temp Refrigerante
   valorMedido = medirTempAgua();
-  //valorMedido = 90;
   if (!cartelParar && valorMedido < TEMP_ALERTA_AGUA) {
     dibujarTempAgua(valorMedido);
   }
@@ -86,9 +90,8 @@ void loop() {
 
   // Check Presion Aceite
   valorMedido = medirPresionAceite();
-  //valorMedido = 121;
   if (!cartelParar && valorMedido < PRES_ALERTA_MAX_ACEITE && valorMedido > PRES_ALERTA_MIN_ACEITE || noSonarAlInicio) {
-    dibujarPresionAceite(valorMedido);
+    dibujarPresionAceite(valorMedido); 
   }
    if (!noSonarAlInicio && !cartelParar && valorMedido >= PRES_ALERTA_MAX_ACEITE) {
     dibujarAlarmaMaxPresionAceite(valorMedido);
@@ -163,7 +166,7 @@ void loop() {
     digitalWrite(PIN_BUZZER, LOW);
   }
 
-  delay(500);
+  delay(INTERVALO_DE_REFRESCO_Y_LECTURAS);
 
 }
 

@@ -204,7 +204,7 @@ void cartelEsperando(){
   display.setCursor(iniciobarras+10, 15);
   display.println(F("ESPERANDO")); // uso F() porque se queda sin memoria
   display.setCursor(iniciobarras+12, 25);
-  display.println(F("INICIAR"));
+  display.println(F("ARRANQUE"));
   display.setFont(&FreeSans9pt7b);
   display.setCursor(iniciobarras+25,50);
   display.print(cuentaRegresiva);

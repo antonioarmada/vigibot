@@ -7,17 +7,19 @@
   #define ESPERA_EN_CONTACTO 60000
 
   #define TEMP_MIN_BLOCK  60 
-  #define TEMP_ALERTA_BLOCK  105
-  #define TEMP_MAX_BLOCK  110
+  #define TEMP_ALERTA_BLOCK  100
+  #define TEMP_MAX_BLOCK  105
   
   #define TEMP_MIN_AGUA  60
-  #define TEMP_ALERTA_AGUA 98
-  #define TEMP_MAX_AGUA  100
+  #define TEMP_ALERTA_AGUA 103
+  #define TEMP_MAX_AGUA  108
+  #define TEMP_NUMERO_LECTURAS_A_PROMEDIAR  10
 
   #define PRES_MIN_ACEITE  11
   #define PRES_ALERTA_MIN_ACEITE 20 
   #define PRES_ALERTA_MAX_ACEITE  120
   #define PRES_MAX_ACEITE 125
+  #define PRES_NUMERO_LECTURAS_A_PROMEDIAR  3
 
   #define VOLTAJE_MEDIO_BAT  12
   #define VOLTAJE_MIN_BAT  8
@@ -25,9 +27,11 @@
   #define VOLTAJE_ALERTA_MAX_BAT  15
   #define VOLTAJE_MAX_BAT  16 
 
-  #define INTERVALO_BUZZER_ALARMA 10000 // long millis
+  #define INTERVALO_BUZZER_ALARMA 30000 // long millis
   #define INTERVALO_BUZZER_PARAR 0 // long millis
   #define DUARACION_BUZZER_ALARMA 2000 // long millis
+
+  #define INTERVALO_DE_REFRESCO_Y_LECTURAS 500 //  millis en delay
 
 
   // divisores de voltaje
