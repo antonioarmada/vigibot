@@ -2,7 +2,7 @@
 
 ### ¿De qué estás habland Willis?
 
-Hice un especie de Vigía para controlar el motor diesel (Maxion 2.5) de mi Land Rover Discovery 1 TDI (1997). Pero podria servir para cualquier motor que que no traiga una ECU que ya lo haga.  Intente hacerlo lo mas simple y barato posible para que sea replicarlo fácil y que no duela el bolsillo, pero a la vez que tenga características que el Vigía carece. Otra premisa general fue no intervenir (agujerear, roscar, pegar, etc), de manera que sea todo revertible con solo extraer los elementos. Cosas que hace Vigibot:
+Hice un especie de Vigía para controlar el motor diesel (Maxion 2.5) de mi Land Rover Discovery 1 TDI (1997). Pero podria servir para cualquier motor que que no traiga una ECU que ya lo haga.  Intente hacerlo lo mas simple y barato posible para que sea fácil replicarlo y que no duela el bolsillo, pero a la vez que tenga características que el Vigía carece. Otra premisa general fue no intervenir (agujerear, roscar, pegar, etc), de manera que sea todo revertible con solo extraer los elementos. Cosas que hace Vigibot:
 
 * Tiene una pequeña pantalla que muestra valores en dígitos y barras. Yo la puse en el tablero sin modificar nada y practicamente no obstruye la visión de otro instrumento.
 * Mide temperatura en tapa de cilindro (Sonda de temp. Ds18b20 "sumergible").
