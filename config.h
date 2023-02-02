@@ -35,6 +35,7 @@
 
 
   // divisores de voltaje
+  // hay que medir el valor exacto de la resistencia que se pone en la placa para que sea preciso
   #define R1_BAT  4700 //+12-Vout 4639- 3675
   #define R2_BAT  983 // Vout-GND
   #define R1_TEMP  32.8 // Vout-GND
